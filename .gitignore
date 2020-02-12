@@ -44,5 +44,5 @@ vignettes/*.pdf
 # R Environment Variables
 .Renviron
 
-# Paths with data that cannot be shared
-/Original Data/
+# Data cannot be shared
+.csv
