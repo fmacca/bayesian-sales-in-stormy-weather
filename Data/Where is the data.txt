@@ -1,0 +1,17 @@
+Unfortunately the rules of the contest clearly state that:
+
+"Sharing code or data outside of teams is not permitted. This includes making code or data made available to all participants, such as on the forums."
+
+For this reason we are not allowed to reshare the data in this repo.
+
+However you can pretty easily download it yourself from the source by joining the kaggle competition at this link:
+
+https://www.kaggle.com/c/walmart-recruiting-sales-in-stormy-weather/data
+
+Just save all the files in this folder and you are good to go!
+
+Important datasets are:
+- key.csv
+- test.csv
+- train.csv
+- weather.csv
