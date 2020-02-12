@@ -45,4 +45,4 @@ vignettes/*.pdf
 .Renviron
 
 # Data cannot be shared
-.csv
+*.csv
