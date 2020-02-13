@@ -1,0 +1,12 @@
+model {
+  for (i in 1 : n) {
+    mu[i] <- a + b[1] * x1[i] + b[2] * x2[i] + b[3] * x3[i] +
+	      b[4] * x4[i] + b[5] * x5[i] + b[6] * x6[i]
+    y[i] ~ dgamma(shape, shape / exp(mu[i]))
+  }
+  a ~ dnorm(0, 0.0001) 
+  for (j in 1 : m) {
+    b[j] ~ dnorm(0, 0.0001)
+  }
+  shape ~ dunif(0, 100)
+}
