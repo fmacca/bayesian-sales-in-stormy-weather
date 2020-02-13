@@ -1,0 +1,10 @@
+model {
+  for(j in 1 : n) {
+    y[j] ~ dpois(lambda[j])
+    log(lambda[j]) <- b[1] + b[2] * x1[j] + b[3] * x2[j] + b[4] * x3[j] + b[5] * x4[j] +
+    b[6] * x5[j] + b[7] * x6[j] + b[8] * x7[j] 
+  }
+  for(k in 1 : m){
+    b[k] ~ dnorm(0, 0.001)
+  }
+}
