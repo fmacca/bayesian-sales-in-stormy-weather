@@ -1,0 +1,13 @@
+model {
+  
+  for(j in 1 : (n-m)){
+    mu[j] <- a + b[1] * x[j+5] + b[2] * x[j+4] + b[3] * x[j+3] + b[4] * x[j+2] + b[5] * x[j+1] + b[6] * x[j]
+    y[j] ~ dnorm(mu[j], tau)
+  }
+  sigma ~ dunif(0,50)
+  tau <- pow(sigma, -2)
+  a ~ dnorm(0,0.01)
+  for(i in 1 : m){
+    b[i] ~ dnorm(0,10)
+  }
+}
