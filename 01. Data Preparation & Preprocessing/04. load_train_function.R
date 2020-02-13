@@ -1,7 +1,7 @@
 #The function to correctly load the "train.csv" dataset
 
 load_train <- function() {
-  data=read.table('train.csv',sep=',',header=TRUE,colClasses=c('character',rep("integer",3)))
+  data=read.table('../Data/train.csv',sep=',',header=TRUE,colClasses=c('character',rep("integer",3)))
   
   library(chron)
   data[,1]=chron(dates=data[,1], format=c(dates="y-m-d"),out.format=c(dates="d/m/y"))
@@ -11,5 +11,5 @@ load_train <- function() {
 
 train=load_train()
 
-save(train,list="train",file="Dataset_pronti/train.RData")
+save(train,list="train",file="../Dataset_pronti/train.RData")
 

@@ -1,7 +1,7 @@
 #The function to correctly load the "weather_temp.txt" dataset
 
 load_weather_temp <- function() {
-  data=read.table("weather_temp.txt",colClasses = "character")
+  data=read.table("../Data/weather_temp.csv",colClasses = "character")
   for(indx in colnames(data))
   {
     data[which(data[,indx]=='M'),indx]=NA
@@ -36,6 +36,6 @@ load_weather_temp <- function() {
 
 weather=load_weather_temp()
 
-save(weather,list="weather",file="Dataset_pronti/weather_temp.RData")
+save(weather,list="weather",file="../Dataset_pronti/weather_temp.RData")
 
 

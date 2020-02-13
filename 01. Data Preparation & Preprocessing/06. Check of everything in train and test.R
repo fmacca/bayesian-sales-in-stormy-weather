@@ -2,8 +2,8 @@ library(chron)
 library(tidyverse)
 library(sqldf)
 
-load('Dataset_pronti/train.RData')
-load('Dataset_pronti/test.RData')
+load('../Dataset_pronti/train.RData')
+load('../Dataset_pronti/test.RData')
 test$units=rep(NA,length(test))
 
 full=rbind(train,test)
@@ -55,8 +55,8 @@ for (st in 1:n_stores){
   }
 }
 
-save(m,list="m",file="Dataset_pronti/which_in_which.RData")
-write.table(m,file="Dataset_pronti/which_in_which.csv",sep=',')
+save(m,list="m",file="../Dataset_pronti/which_in_which.RData")
+write.table(m,file="../Dataset_pronti/which_in_which.csv",sep=',')
 
 # for (st in 1:max(full$store_nbr)){
 #   for(it in 1:max(full$item_nbr)){
