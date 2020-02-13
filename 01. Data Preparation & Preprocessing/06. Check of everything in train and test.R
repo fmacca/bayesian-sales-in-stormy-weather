@@ -54,7 +54,7 @@ for (st in 1:n_stores){
     
   }
 }
-
+m=t(m)
 save(m,list="m",file="../Dataset_pronti/which_in_which.RData")
 write.table(m,file="../Dataset_pronti/which_in_which.csv",sep=',')
 
