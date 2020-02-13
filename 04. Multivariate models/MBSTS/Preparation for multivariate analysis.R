@@ -121,8 +121,10 @@ for(feat in features)
 
 
 # Some useful analysis
+cov(working_full[,2:6])
+cor(working_full[,2:6])
 
-
+cor(working_full[,2:31])
 
 
 
