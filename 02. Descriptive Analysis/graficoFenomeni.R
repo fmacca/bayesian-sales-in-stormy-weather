@@ -1,6 +1,6 @@
 library(dplyr)
 library(ggplot2)
-weather <- read.table('weather_temp.txt', header = TRUE)
+weather <- read.table('../Data/weather_temp.csv', header = TRUE)
 
 fenomeni <- length(which(weather$rain + weather$thunder + weather$snow + weather$hail + 
                     weather$fog + weather$foschia + weather$sand + weather$freeze + 

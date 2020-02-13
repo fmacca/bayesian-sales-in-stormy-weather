@@ -1,5 +1,5 @@
 library(dplyr)
-weather <- read.table('weather_temp.txt', header = TRUE)
+weather <- read.table('../Data/weather_temp.csv', header = TRUE)
 
 for (i in 1:20517){
   if (weather[i,5] == 'M'){
@@ -46,7 +46,7 @@ lines(1:1035,st_avg, col = 'green', type = 'l', lty = 1, lwd = 2)
 legend(850, 10, legend = c("Hottest","Coolest","Average"), 
        col = c("red","blue","green"), lty = 1, cex = 0.8, box.lty = 0, lwd = c(1,1,2))
 
-weatherM <- read.table('weather.csv', header = TRUE, sep = ',')
+weatherM <- read.table('../Data/weather.csv', header = TRUE, sep = ',')
 
 dataM7 <- weatherM %>% filter(weatherM$station_nbr == 9, weatherM$tavg == 'M')
 dataM8 <- weatherM %>% filter(weatherM$station_nbr == 10, weatherM$tavg == 'M')

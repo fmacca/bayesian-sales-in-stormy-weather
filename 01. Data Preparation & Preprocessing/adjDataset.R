@@ -1,5 +1,5 @@
 library(dplyr)
-data <- read.table('weather.csv', header = TRUE, sep = ',')
+data <- read.table('../Data/weather.csv', header = TRUE, sep = ',')
 attach(data)
 #data_ <- data %>% filter()
 
@@ -146,7 +146,7 @@ data <- data.frame(cbind(data,smoke))
 
 data <- data[,-c(9,10,13)]
 
-#write.table(data, file = "./weather_temp.txt")
+write.table(data, file = "../Data/weather_temp.csv")
 
 
 
