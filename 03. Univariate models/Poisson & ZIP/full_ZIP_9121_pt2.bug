@@ -1,0 +1,18 @@
+model {
+  for(j in 1 : n) {
+    y[j] ~ dpois(mu[j])
+    mu[j] <- (1 - u[j]) * lambda[j]
+    u[j] ~ dbern(p[j])
+    logit (p[j]) <- a[1] + a[2] * x2[j] + a[3] * x7[j]
+    log(lambda[j]) <- b[1] + b[2] * x1[j] + b[3] * x2[j] + b[4] * x3[j] + b[5] * x4[j] +
+    b[6] * x5[j] + b[7] * x6[j] + b[8] * x7[j]
+  }
+  for(k in 1 : ma){
+    a[k] ~ dnorm(0, 0.001)
+  }
+  for(k in 1 : mb){
+    b[k] ~ dnorm(0, 0.001)
+  }
+}
+
+
