@@ -7,12 +7,12 @@ library(plotrix)
 
 ### Prepare the dataset
 
-train <- read.table('train.csv', header = TRUE, sep = ',')
+train <- read.table('../../Data/train.csv', header = TRUE, sep = ',')
 train <- train %>% filter(train$store_nbr == 21, train$item_nbr == 91) # item 91, store 21
-key <- read.table('key.csv', header = TRUE, sep = ',') # store 21 --> station 3
-# load weather dataset from Dataset_pronti
+key <- read.table('../../Data/key.csv', header = TRUE, sep = ',') # store 21 --> station 3
+load('../../Dataset_pronti/weather_temp.RData')
 meteo <- weather %>% filter(weather$station_nbr == 3)
-weather_temp <- read.table('weather_temp.txt', header = TRUE)
+weather_temp <- read.table('../../Data/weather_temp.csv', header = TRUE)
 meteo_temp <- weather_temp %>% filter(weather_temp$station_nbr == 3)
 
 # integrate train dataset (units sold of product 91 in store 21) with meteo 
