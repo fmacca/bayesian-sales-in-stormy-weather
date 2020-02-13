@@ -628,8 +628,9 @@ lines(perc0pred, type = "b", col = "aquamarine4", lwd = 3, lty = 2)
 
 
 # TEST PREDICTION 2013
+# You can run this part only if you have previously run "test_9121.R" script which will create the file "test_9121.csv"
 
-test9121 <- read.table("test_9121.txt", header=TRUE)
+test9121 <- read.table("test_9121.csv", header=TRUE)
 
 ### Our Data vs Predictive Distribution
 n.chain <- dim(data.outP)[1]
