@@ -1,6 +1,6 @@
 library(dplyr)
 library(ggplot2)
-weather <- read.table('weather_temp.txt', header = TRUE)
+weather <- read.table('../Data/weather_temp.csv', header = TRUE)
 
 pioggia <- as.numeric(length(which(weather$rain == 1 & 
                                      weather$snow == 0 & 

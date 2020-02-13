@@ -1,7 +1,7 @@
-datatest <- read.table('test.csv', header = TRUE, sep = ',')
+datatest <- read.table('../Data/test.csv', header = TRUE, sep = ',')
 names(table(datatest$date))
-weather <- read.table('weather.csv', header = TRUE, sep = ',')
-weather_temp <- read.table('weather_temp.txt', header = TRUE)
+weather <- read.table('../Data/weather.csv', header = TRUE, sep = ',')
+weather_temp <- read.table('../Data/weather_temp.csv', header = TRUE)
 
 index <- rep(1,526917/111)
 for (i in 1:(526917/111)){
@@ -9,7 +9,7 @@ for (i in 1:(526917/111)){
 }
 datestore <- datatest[index,1:2]
 
-key <- read.table('key.csv', header = TRUE, sep = ',')
+key <- read.table('../Data/key.csv', header = TRUE, sep = ',')
 
 station <- rep(0,dim(datestore)[1])
 for (i in 1:dim(datestore)[1]){
@@ -92,7 +92,7 @@ A = A[,3:26]
 
 weatherTEST <- data.frame(cbind(date_store_station,A))
 
-#write.table(weatherTEST, file = "./weatherTEST.txt")
+write.table(weatherTEST, file = "../Data/weatherTEST.csv")
 
 
 

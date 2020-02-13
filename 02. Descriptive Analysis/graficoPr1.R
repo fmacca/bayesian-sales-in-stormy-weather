@@ -1,7 +1,9 @@
-train <- read.table('train.csv', header = TRUE, sep = ',')
+# Run graficoTemperature before running this code, you need some of those variables in the global environment
+
+train <- read.table('../Data/train.csv', header = TRUE, sep = ',')
 train1 <- train %>% filter(train$item_nbr == 1, train$units > 0)
 train36_1 <- train %>% filter(train$store_nbr == 36, train$item_nbr == 1)
-weather <- read.table('weather_temp.txt', header = TRUE)
+weather <- read.table('../Data/weather_temp.csv', header = TRUE)
 weather1 <- weather %>% filter(weather$station_nbr == 1)
 
 st36_pr1 <- rep(-1,1035)
@@ -24,7 +26,7 @@ plot(d,st36_pr1, col = 'green4', type='h', lty=1,
 
 points(naind,redPoints, col = 'red', pch = 20)
 
-# Ho runnato graficoTemperature
+#
 
 st_avg_new = st_avg/max(st_avg)*4+3
 

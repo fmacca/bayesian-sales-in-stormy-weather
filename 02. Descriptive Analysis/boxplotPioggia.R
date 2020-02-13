@@ -1,6 +1,6 @@
-train <- read.table('train.csv', header = TRUE, sep = ',')
-weather <- read.table('weather_temp.txt', header = TRUE)
-key <- read.table('key.csv', header = TRUE, sep = ',')
+train <- read.table('../Data/train.csv', header = TRUE, sep = ',')
+weather <- read.table('../Data/weather_temp.csv', header = TRUE)
+key <- read.table('../Data/key.csv', header = TRUE, sep = ',')
 
 library(dplyr)
 #sandplace <- weather %>% filter(weather$sand == 1 | weather$smoke == 1)
@@ -51,3 +51,4 @@ boxplot(df, col = c('deepskyblue2','midnightblue','dodgerblue3'), main = 'Effect
 
 
 sort(Bsoldrain)
+
