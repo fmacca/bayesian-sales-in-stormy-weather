@@ -1,0 +1,10 @@
+This folder should contain all the preprocessed data.
+
+Unfortunately the rules of the contest clearly state that:
+
+"Sharing code or data outside of teams is not permitted. This includes making code or data made available to all participants, such as on the forums."
+
+For this reason we are not allowed to reshare the data in this repo.
+
+In order to have all the preprocessed dataset here you should create them by running the scripts in the folder "01. Data Prearation & Preprocessing".
+Before doing that, make sure you have downloaded the original dataset into the folder "Data". You will find instruction to do it inside that folder.
