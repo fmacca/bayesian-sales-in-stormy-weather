@@ -67,12 +67,12 @@ for(i in 1:45){
     plot(working_dataset$date,working_dataset$units,xlab='Date',ylab='Units',main=paste('Product',item,'in store',store,": units"),col = 'green4', type='l')
     if(actually==1)
     {
-      working_full=working_dataset[,c(1,7)]
+      working_full=data.frame(working_dataset$date,working_dataset$units)
       cn=c('date',paste('units',store,sep='_'))
     }
     else
     {
-      working_full[,actually+1]=working_dataset[,7]
+      working_full[,actually+1]=working_dataset$units
       cn=c(cn,paste('units',store,sep='_'))
     }
   }
@@ -151,6 +151,7 @@ blackfriday <- rep(0,366)
 blackfriday[which(mydata$date<chron(dates="27/11/12", format=c(dates="d/m/y")) & 
                     mydata$date>chron(dates="19/11/12", format=c(dates="d/m/y")))] = rep(1,7) 
 mydata <- data.frame(mydata,blackfriday)
+
 
 save(mydata,list="mydata",file="../../Dataset_pronti/mydata.RData")
 
