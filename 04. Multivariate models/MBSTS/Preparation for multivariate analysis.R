@@ -40,7 +40,7 @@ summary(train)
 ## SETTINGS
 last_date='01/01/13'
 item=44
-features=c('preciptotal','snowfall','resultspeed','rain','snow') #weather related local features (different in each store every day)
+features=c('preciptotal','snowfall','tavg','avgspeed','rain','snow') #weather related local features (different in each store every day)
 
 # Adding units for nonzero time series
 x11()
@@ -118,7 +118,41 @@ for(feat in features)
 }
 
 # Adding global features (that are the same in every store so only one column per feature) (ex. holidays)
+# introduce weekends
+sett <- c(1,0,0,0,0,0,1)
+weekend <- c(rep(sett,52),1,0)
+mydata <- data.frame(working_full,weekend)
+# introduce holidays
+holiday <- rep(0,366) 
+for (i in 1:dim(mydata)[1]) {
+  if (mydata$date[i]==chron(dates="01/01/12", format=c(dates="d/m/y")) |
+      mydata$date[i]==chron(dates="16/01/12", format=c(dates="d/m/y")) |
+      mydata$date[i]==chron(dates="14/02/12", format=c(dates="d/m/y")) |
+      mydata$date[i]==chron(dates="20/02/12", format=c(dates="d/m/y")) |
+      mydata$date[i]==chron(dates="08/04/12", format=c(dates="d/m/y")) |
+      mydata$date[i]==chron(dates="13/05/12", format=c(dates="d/m/y")) |
+      mydata$date[i]==chron(dates="28/05/12", format=c(dates="d/m/y")) |
+      mydata$date[i]==chron(dates="17/06/12", format=c(dates="d/m/y")) |
+      mydata$date[i]==chron(dates="04/07/12", format=c(dates="d/m/y")) |
+      mydata$date[i]==chron(dates="03/09/12", format=c(dates="d/m/y")) |
+      mydata$date[i]==chron(dates="08/10/12", format=c(dates="d/m/y")) |
+      mydata$date[i]==chron(dates="31/10/12", format=c(dates="d/m/y")) |
+      mydata$date[i]==chron(dates="11/11/12", format=c(dates="d/m/y")) |
+      mydata$date[i]==chron(dates="22/11/12", format=c(dates="d/m/y")) |
+      mydata$date[i]==chron(dates="24/12/12", format=c(dates="d/m/y")) |
+      mydata$date[i]==chron(dates="25/12/12", format=c(dates="d/m/y")) |
+      mydata$date[i]==chron(dates="31/12/12", format=c(dates="d/m/y"))) {
+    holiday[i] = 1
+  }
+}  
+mydata <- data.frame(mydata,holiday)
+# Black Friday
+blackfriday <- rep(0,366)  
+blackfriday[which(mydata$date<chron(dates="27/11/12", format=c(dates="d/m/y")) & 
+                    mydata$date>chron(dates="19/11/12", format=c(dates="d/m/y")))] = rep(1,7) 
+mydata <- data.frame(mydata,blackfriday)
 
+save(mydata,list="mydata",file="../../Dataset_pronti/mydata.RData")
 
 # Some useful analysis
 cov(working_full[,2:6])
