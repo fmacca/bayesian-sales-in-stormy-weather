@@ -1,0 +1,25 @@
+model {
+
+  for(i in 1 : n){
+    for(j in 1 : m){
+	    mu[i,j] <- inprod(z[i,],a[,j]) + x1[i,j] * b1[j] + x2[i,j] * b2[j] + x3[i,j] *          b3[j] + x4[i,j] * b4[j] + x5[i,j] * b5[j]  
+	    #nel foglio diventa a???Z
+	  }
+	  y[i,] ~ dmnorm(mu[i,], Y.tau[,])
+  }
+
+  # ???
+
+  for(j in 1 : m){
+    b1[j] ~ dnorm(0,0.001)
+    b2[j] ~ dnorm(0,0.001)
+    b3[j] ~ dnorm(0,0.001)
+    b4[j] ~ dnorm(0,0.001)
+    b5[j] ~ dnorm(0,0.001)
+
+    for(i in 1 : m){
+	    a[i,j] ~ dnorm(0,0.001)
+    } 
+  }
+
+}

@@ -1,0 +1,1 @@
+Before running the models (MBSTS and VARX), run all the preparation scripts in this folder

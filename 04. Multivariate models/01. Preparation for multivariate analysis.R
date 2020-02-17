@@ -4,10 +4,10 @@ library(tidyverse)
 library(data.table)
 
 #Dataset
-load('../../Dataset_pronti/weather_temp.RData')
-load('../../Dataset_pronti/train.RData')
-key=read.table('../../Data/key.csv',sep=',',header=TRUE)
-wiw=read.table('../../Dataset_pronti/which_in_which.csv',sep=',',header=TRUE)
+load('../Dataset_pronti/weather_temp.RData')
+load('../Dataset_pronti/train.RData')
+key=read.table('../Data/key.csv',sep=',',header=TRUE)
+wiw=read.table('../Dataset_pronti/which_in_which.csv',sep=',',header=TRUE)
 
 #Some useful function for selecting the time series
 unit_series <- function(data,store,item,last_date='14/12/19',all.dates=FALSE) {
@@ -67,12 +67,12 @@ for(i in 1:45){
     plot(working_dataset$date,working_dataset$units,xlab='Date',ylab='Units',main=paste('Product',item,'in store',store,": units"),col = 'green4', type='l')
     if(actually==1)
     {
-      working_full=working_dataset[,c(1,7)]
+      working_full=data.frame(working_dataset$date,working_dataset$units)
       cn=c('date',paste('units',store,sep='_'))
     }
     else
     {
-      working_full[,actually+1]=working_dataset[,7]
+      working_full[,actually+1]=working_dataset$units
       cn=c(cn,paste('units',store,sep='_'))
     }
   }
@@ -152,13 +152,80 @@ blackfriday[which(mydata$date<chron(dates="27/11/12", format=c(dates="d/m/y")) &
                     mydata$date>chron(dates="19/11/12", format=c(dates="d/m/y")))] = rep(1,7) 
 mydata <- data.frame(mydata,blackfriday)
 
-save(mydata,list="mydata",file="../../Dataset_pronti/mydata.RData")
+# day before a snowfall
+mydata[1:365,32:36]=mydata[2:366,32:36]
+mydata[366,32:36]=c(0,0,0,0,0)
 
-# Some useful analysis
-cov(working_full[,2:6])
-cor(working_full[,2:6])
+save(mydata,list="mydata",file="../Dataset_pronti/mydata.RData")
 
-cor(working_full[,2:31])
+
+
+# correlation and covariance matrix
+
+library(corrplot)
+
+cov(mydata[,2:6])
+M <- cor(mydata[,2:6])
+
+corrplot(M, method='circle')
+
+# autocorrelation
+
+library(forecast)
+library(tseries)
+library(graphics)
+
+
+products <- mydata[,2:6]
+
+
+plot.ts(products, plot.type="s", col=rainbow(5))
+legend("topleft", legend=c("2", "21", "30", "33", "36"),
+       col=rainbow(5), lty=1, cex=0.6, box.lty=0)
+adf.test(products, alternative="stationary", k=0)
+
+acf(products, lag.max = 20)
+pacf(products, lag.max = 20)
+
+
+
+# create dummy variables for the days of the week 2012
+
+sun <- c(1,0,0,0,0,0,0)
+sun <- rep(sun,52)
+sun <- c(sun,1,0)
+
+mon <- c(0,1,0,0,0,0,0)
+mon <- rep(mon,52)
+mon <- c(mon,0,1)
+
+tue <- c(0,0,1,0,0,0,0)
+tue <- rep(tue,52)
+tue <- c(tue,0,0)
+
+wed <- c(0,0,0,1,0,0,0)
+wed <- rep(wed,52)
+wed <- c(wed,0,0)
+
+thu <- c(0,0,0,0,1,0,0)
+thu <- rep(thu,52)
+thu <- c(thu,0,0)
+
+fri <- c(0,0,0,0,0,1,0)
+fri <- rep(fri,52)
+fri <- c(fri,0,0)
+
+sat <- c(0,0,0,0,0,0,1)
+sat <- rep(sat,52)
+sat <- c(sat,0,0)
+
+mydata_week <- data.frame(mydata, sun, mon, tue, wed, thu, fri, sat)
+save(mydata_week,list="mydata_week",file="../Dataset_pronti/mydata_week.RData")
+
+
+
+
+
 
 
 

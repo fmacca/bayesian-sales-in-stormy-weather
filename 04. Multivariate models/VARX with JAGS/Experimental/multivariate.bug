@@ -1,0 +1,38 @@
+model {
+
+  for(j in 1 : n){
+	mu1[j] <- b[1] * z1[j] + b[2] * z2[j] + b[3] * z3[j]+ b[4] * z4[j] + b[5] * z5[j] + b[6] * x11[j] + b[7] * x12[j] + b[8] * x13[j] + b[9] * x14[j] + b[10] * x15[j]
+
+	mu2[j] <- b[11] * z1[j] + b[12] * z2[j] + b[13] * z3[j]+ b[14] * z4[j] + b[15] * z5[j] + b[16] * x21[j] + b[17] * x22[j] + b[18] * x23[j] + b[19] * x24[j] + b[20] * x25[j]
+
+	mu3[j] <- b[21] * z1[j] + b[22] * z2[j] + b[23] * z3[j]+ b[24] * z4[j] + b[25] * z5[j] + b[26] * x31[j] + b[27] * x32[j] + b[28] * x33[j] + b[29] * x34[j] + b[30] * x35[j]
+
+	mu4[j] <- b[31] * z1[j] + b[32] * z2[j] + b[33] * z3[j]+ b[34] * z4[j] + b[35] * z5[j] + b[36] * x41[j] + b[37] * x42[j] + b[38] * x43[j] + b[39] * x44[j] + b[40] * x45[j]
+
+	mu5[j] <- b[41] * z1[j] + b[42] * z2[j] + b[43] * z3[j]+ b[44] * z4[j] + b[45] * z5[j] + b[46] * x51[j] + b[47] * x52[j] + b[48] * x53[j] + b[49] * x54[j] + b[50] * x55[j]
+
+	y1[j] ~ dnorm(mu1[j], tau1)
+	y2[j] ~ dnorm(mu2[j], tau2)
+	y3[j] ~ dnorm(mu3[j], tau3)
+	y4[j] ~ dnorm(mu4[j], tau4)
+	y5[j] ~ dnorm(mu5[j], tau5)
+  }
+  sigma1 ~ dunif(0,100)
+  tau1 <- pow(sigma1, -2)
+
+  sigma2 ~ dunif(0,100)
+  tau2 <- pow(sigma2, -2)
+
+  sigma3 ~ dunif(0,100)
+  tau3 <- pow(sigma3, -2)
+
+  sigma4 ~ dunif(0,100)
+  tau4 <- pow(sigma4, -2)
+
+  sigma5 ~ dunif(0,100)
+  tau5 <- pow(sigma5, -2)
+
+  for(i in 1 : m){
+    b[i] ~ dnorm(0,0.001)
+  }
+}

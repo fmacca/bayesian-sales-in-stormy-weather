@@ -36,6 +36,7 @@ load_weather_temp <- function() {
 
 weather=load_weather_temp()
 
+
 save(weather,list="weather",file="../Dataset_pronti/weather_temp.RData")
 
 

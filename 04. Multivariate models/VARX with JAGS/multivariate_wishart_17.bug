@@ -1,0 +1,81 @@
+model {
+
+  for(i in 1 : n){
+    for(j in 1 : m){
+	    mu[i,j] <- inprod(z1[i,],a1[,j]) 
+	    + inprod(z7[i,],a7[,j]) + x1[i,j] * b1[j] + x2[i,j] * b2[j] + x3[i,j] * b3[j] 
+	    + x4[i,j] * b4[j] + x5[i,j] * b5[j]  
+	    #nel foglio diventa a'Z
+	  }
+	  y[i,] ~ dmnorm(mu[i,], Y.tau[,])
+  }
+
+  Y.tau[1:5, 1:5] ~ dwish(R[,],5)
+  tau[1:5, 1:5] <- inverse(Y.tau[,])
+
+  for(j in 1 : m){
+    b1[j] ~ dnorm(0,0.001)
+    b2[j] ~ dnorm(0,0.001)
+    b3[j] ~ dnorm(0,0.001)
+    b4[j] ~ dnorm(0,0.001)
+    b5[j] ~ dnorm(0,0.001)
+    for(i in 1 : m){
+	    a1[i,j] ~ dnorm(0,0.001)
+	    a7[i,j] ~ dnorm(0,0.001)
+    } 
+  }
+  
+  # Prediction for data at t + 1 (that should be given)
+  for(j in 1:m){
+    mustar[1,j] <- inprod(zstar1[1,],a1[,j]) + inprod(zstar7[1,],a7[,j]) + x1star[1,j] * b1[j] 
+    + x2star[1,j] * b2[j] + x3star[1,j] * b3[j] + x4star[1,j] * b4[j] 
+    + x5star[1,j] * b5[j]
+  }
+  for(j in 1:m){
+    mustar[2,j] <- inprod(ystar[1,],a1[,j]) + inprod(zstar7[2,],a7[,j]) + x1star[2,j] * b1[j] 
+    + x2star[2,j] * b2[j] + x3star[2,j] * b3[j] + x4star[2,j] * b4[j] 
+    + x5star[2,j] * b5[j]
+  }
+  for(j in 1:m){
+    mustar[3,j] <- inprod(ystar[2,],a1[,j]) + inprod(zstar7[3,],a7[,j]) + x1star[3,j] * b1[j] 
+    + x2star[3,j] * b2[j] + x3star[3,j] * b3[j] + x4star[3,j] * b4[j] 
+    + x5star[3,j] * b5[j]
+  }
+  for(j in 1:m){
+    mustar[4,j] <- inprod(ystar[3,],a1[,j]) + inprod(zstar7[4,],a7[,j]) + x1star[4,j] * b1[j] 
+    + x2star[4,j] * b2[j] + x3star[4,j] * b3[j] + x4star[4,j] * b4[j] 
+    + x5star[4,j] * b5[j]
+  }
+  for(j in 1:m){
+    mustar[5,j] <- inprod(ystar[4,],a1[,j]) + inprod(zstar7[5,],a7[,j]) + x1star[5,j] * b1[j] 
+    + x2star[5,j] * b2[j] + x3star[5,j] * b3[j] + x4star[5,j] * b4[j] 
+    + x5star[5,j] * b5[j]
+  }
+  for(j in 1:m){
+    mustar[6,j] <- inprod(ystar[5,],a1[,j]) + inprod(zstar7[6,],a7[,j]) + x1star[6,j] * b1[j] 
+    + x2star[6,j] * b2[j] + x3star[6,j] * b3[j] + x4star[6,j] * b4[j] 
+    + x5star[6,j] * b5[j]
+  }
+  for(j in 1:m){
+    mustar[7,j] <- inprod(ystar[6,],a1[,j]) + inprod(zstar7[7,],a7[,j]) + x1star[7,j] * b1[j] 
+    + x2star[7,j] * b2[j] + x3star[7,j] * b3[j] + x4star[7,j] * b4[j] 
+    + x5star[7,j] * b5[j]
+  }
+  ystar[1,1:m] ~ dmnorm(mustar[1,1:m], Y.tau)
+  ystar[2,1:m] ~ dmnorm(mustar[2,1:m], Y.tau)
+  ystar[3,1:m] ~ dmnorm(mustar[3,1:m], Y.tau)
+  ystar[4,1:m] ~ dmnorm(mustar[4,1:m], Y.tau)
+  ystar[5,1:m] ~ dmnorm(mustar[5,1:m], Y.tau)
+  ystar[6,1:m] ~ dmnorm(mustar[6,1:m], Y.tau)
+  ystar[7,1:m] ~ dmnorm(mustar[6,1:m], Y.tau)
+  # predition for data at t + k; k > 1
+  for(i in 8:nstar){
+    for(j in 1:m){
+      mustar[i,j] <- inprod(ystar[i-1,],a1[,j])
+      + inprod(ystar[i-7,],a7[,j]) + x1star[i,j] * b1[j] + x2star[i,j] * b2[j] 
+      + x3star[i,j] * b3[j] + x4star[i,j] * b4[j] + x5star[i,j] * b5[j]
+    }
+    ystar[i,1:m] ~ dmnorm(mustar[i,1:m], Y.tau)
+  }
+
+}
