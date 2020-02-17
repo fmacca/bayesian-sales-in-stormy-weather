@@ -11,7 +11,20 @@ Instructions:
 
 Content of every folder:
 
-"02. Descriptive Analysis"
+"01. Data Preparation & Preprocessing": Scripts to prepare the dataset to be analyzed.
+
+"02. Descriptive Analysis": Scriptis to visually see some features of the dataset.
+
+"03. Univariates models": Models that analyze time series by themselves, without taking into account interactions, as seen in Presetation 2. Those include:
+- Poisson & ZIP
+- Gaussian & Gamma
+- BSTS
+- A first attempt to buid an AR model in JAGS (was developed more in depth in the multivariate part)
+
+"04. Multivariate models": In the folder you find scripts numbered from 01 to 09 to put the dataset in a format that is instrumental for multivariate analysis and two model folders:
+- MBSTS which proves that the BSTS package beta version for Multivariate models is not mature enough for real use.
+- VARX with JAGS which contains the multivariate autoregressive models with external covariates we have built. A more accurate description of what is inside can be found in the "Description.txt" file inside that folder.
+
 
 
 

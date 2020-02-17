@@ -2,3 +2,4 @@ The folder contains R scripts and .bug models for Vectorial Autoregressive with 
 The files "multivariate_official_n.R" with corresponding "multivariate_wishart_n.bug" are VARX of order n.
 The file "multivariate_official_17.R" with corresponding "multivariate_wishart_17.bug" is a VARX of order 7 in which coefficients from 2 to 6 are forced to 0.
 The file "multivariate_official_week.R" with corresponding "multivariate_wishart_week.bug" is a VARX of order 1 which contains as covariates the days of the week.
+The folder "Experimental" contains a script and bug files with different trials that brought to the "official" model.
